@@ -45,6 +45,7 @@ function execute(name, fn, cb) {
     log(' - %s\n\t%s', name, msg);
     fails ++;
     tests.pending = false;
+    tests.next();
   });
   d.run(function() {
     return fn(cb);
