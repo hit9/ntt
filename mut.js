@@ -27,7 +27,7 @@ var log = console.log;
 function execute(name, fn, cb) {
   try {
     fn(cb);
-    log('  ✓ %s', name);
+    log(' + %s', name);
   } catch(e) {
     var msg;
     if (e.stack) {
@@ -40,7 +40,7 @@ function execute(name, fn, cb) {
     } else {
       msg = e.toString();
     }
-    log('  ✖ %s => %s', name, msg);
+    log(' - %s\n\t%s', name, msg);
     fails ++;
   }
 }
