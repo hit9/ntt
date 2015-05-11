@@ -6,12 +6,12 @@
 // Example:
 //
 //   mut('unit', function(test) {
-//     test('case1', function(t) {
-//       t.done();
+//     test('case1', function(done) {
+//       done();
 //     });
-//     test('case2', function(t) {
+//     test('case2', function(done) {
 //       setTimeout(function() {
-//         t.done();
+//         done();
 //       }, 1000)
 //     });
 //   });
@@ -36,8 +36,7 @@ function execute(name, fn, cb) {
              .slice(0, 2)
              .map(function(s) {
                return s.trim();
-             })
-             .join(', ');
+             }).join(', ');
     } else {
       msg = e.toString();
     }
