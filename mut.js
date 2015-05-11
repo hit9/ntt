@@ -5,76 +5,84 @@
 //
 // Example:
 //
-//   mut('request', function(test) {
-//     test('get', function(t) {});
-//     test('post', function(t) {});
+//   mut('unit', function(test) {
+//     test('case1', function(t) {
+//       t.done();
+//     });
+//     test('case2', function(t) {
+//       setTimeout(function() {
+//         t.done();
+//       }, 1000)
+//     });
 //   });
 //
 // License: MIT.
 
-var assert = require('assert');
-var util   = require('util');
-
-
+var fails = 0;
 var tests = [];
+var units = [];
 
-tests.put = function(name, fn) {
-  tests.push([name, fn]);
-};
+var log = console.log;
 
-tests.next = function() {
-  var test = tests.shift();
-  if (!test)
-    return;
-
-  var name = test[0];
-  var fn = test[1];
-
+function execute(name, fn, cb) {
   try {
-    var startAt = new Date();
-    fn(t);
-    var endAt = new Date();
-    console.log('   ✓ %s %sms', name,
-                (endAt - startAt).toFixed(2));
+    fn(cb);
+    log('  ✓ %s', name);
   } catch(e) {
-    console.log('   ✖ %s ', name);
+    var msg;
     if (e.stack) {
-      var lines = e.stack.split('\n').slice(0, 2);
-      console.log('     %s', lines[0]);
-      console.log('     %s', lines[1]);
+      msg = e.stack.trim()
+             .split(/\n/)
+             .slice(0, 2)
+             .map(function(s) {
+               return s.trim();
+             })
+             .join(', ');
+    } else {
+      msg = e.toString();
     }
-  } finally {
-    tests.next();
+    log('  ✖ %s => %s', name, msg);
+    fails ++;
+  }
+}
+
+tests.pending = false;
+tests.next = function() {
+  if (!tests.pending) {
+    var test = tests.shift();
+    if (!test) {
+      units.pending = false;
+      units.next();
+      return;
+    }
+
+    tests.pending = true;
+    execute(test[0], test[1], function() {
+      tests.pending = false;
+      tests.next();
+    });
   }
 };
 
-
-var t = {};
-
-t.log = console.log;
-t.done = tests.next;
-t.assert = assert;
-
-var units = [];
-
-units.put = function(name, fn) {
-  units.push([name, fn]);
-};
-
+units.pending = false;
 units.next = function() {
-  var unit = units.shift();
-  if (!unit)
-    return;
+  if (!units.pending) {
+    var unit = units.shift();
+    if (!unit) {
+      log('\n=> %d fails', fails);
+      process.exit(fails);
+    }
 
-  console.log('=> %s', unit[0]);
-  unit[1](function(name, fn) {
-    tests.put(name, fn);
-    tests.next();
-  });
-  units.next();
+    log('# %s', unit[0]);
+    units.pending = true;
+    unit[1](function(name, fn) {
+      tests.push([name, fn]);
+      tests.next();
+    });
+  }
 };
 
 module.exports = function(name, fn) {
-  units.put(name, fn);
+  units.push([name, fn]);
   units.next();
 };
