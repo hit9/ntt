@@ -1,18 +1,24 @@
-var mut = require('./mut');
-var fs = require('fs');
+var assert = require('assert');
+var unit = require('./mut');
 
-mut('requests', function(test) {
-  test('set', function(t) {
-    t.assert.ok(1);
-    for (var i = 0; i < 1000; i ++)
-    fs.stat('mut.js', function() {
-      t.done();
+unit('example', function(test) {
+  test('case1', function(done) {
+    // should fail
+    assert(1 + 2 == 1);
+    done();
+  });
+  test('case2', function(done) {
+    // should pass
+    setTimeout(function() {
+      assert(1 + 2 == 3);
+      done();
+    }, 1000);
+  });
+  test('case3', function(done) {
+    // should fail
+    process.nextTick(function() {
+      assert(1 + 3 == 5);
+      done();
     })
-  });
-  test('get', function(t) {
-    t.assert.ok(0);
-  });
-  test('get', function(t) {
-    t.assert.ok(0);
   });
 });

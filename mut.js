@@ -18,31 +18,37 @@
 //
 // License: MIT.
 
+var domain = require('domain');
+
 var fails = 0;
 var tests = [];
 var units = [];
 
 var log = console.log;
 
+
 function execute(name, fn, cb) {
-  try {
-    fn(cb);
-    log(' + %s', name);
-  } catch(e) {
+  var d = domain.create();
+  d.on('error', function(e) {
+    // on fail
     var msg;
     if (e.stack) {
       msg = e.stack.trim()
-             .split(/\n/)
-             .slice(0, 2)
-             .map(function(s) {
-               return s.trim();
-             }).join(', ');
+      .split(/\n/)
+      .slice(0, 2)
+      .map(function(s) {
+        return s.trim();
+      }).join(', ');
     } else {
       msg = e.toString();
     }
     log(' - %s\n\t%s', name, msg);
     fails ++;
-  }
+    tests.pending = false;
+  });
+  d.run(function() {
+    return fn(cb);
+  });
 }
 
 tests.pending = false;
@@ -57,6 +63,8 @@ tests.next = function() {
 
     tests.pending = true;
     execute(test[0], test[1], function() {
+      // on pass
+      log(' + %s', test[0]);
       tests.pending = false;
       tests.next();
     });
@@ -76,7 +84,7 @@ units.next = function() {
     units.pending = true;
     unit[1](function(name, fn) {
       tests.push([name, fn]);
-      tests.next();
+      process.nextTick(tests.next);
     });
   }
 };
