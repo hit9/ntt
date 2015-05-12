@@ -1,6 +1,6 @@
 {
     "name": "mut",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "repository": {
         "type": "git",
         "url": "git://github.com/hit9/mut"
@@ -9,5 +9,6 @@
     "description": "Mini unittests module for nodejs/iojs.",
     "author": "hit9 <hit9@icloud.com>",
     "keywords": ["test"],
+    "main": ["./mut.js"],
     "license": "MIT"
 }
