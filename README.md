@@ -28,6 +28,8 @@ unit('unit', function(test) {
 });
 ```
 
+mut is **not a testing tool**, just run `node test.js`.
+
 License
 ------------
 MIT.
