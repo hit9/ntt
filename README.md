@@ -3,6 +3,11 @@ mut
 
 Mini unittests module for nodejs/iojs.
 
+Install
+-------
+
+    npm install mut
+
 Example
 -------
 
