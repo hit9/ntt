@@ -64,7 +64,7 @@ function execute(name, fn, cb) {
     var flag = styled('-', 'red');
     var nam_ = styled(name, 'red');
     var msg_ = styled(msg, 'grey');
-    log(' %s %s\n\t%s', flag, nam_, msg_);
+    log(' %s %s %s', flag, nam_, msg_);
 
     fails ++;
     tests.pending = false;
