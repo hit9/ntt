@@ -9,12 +9,17 @@ unit('example', function(test) {
   });
   test('case2', function(done) {
     // should pass
+    assert(true);
+    done();
+  });
+  test('case3', function(done) {
+    // should pass
     setTimeout(function() {
       assert(1 + 2 == 3);
       done();
     }, 1000);
   });
-  test('case3', function(done) {
+  test('case4', function(done) {
     // should fail
     process.nextTick(function() {
       assert(1 + 3 == 5);
