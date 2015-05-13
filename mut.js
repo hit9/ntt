@@ -56,7 +56,7 @@ function execute(name, fn, cb) {
       .slice(0, 2)
       .map(function(s) {
         return s.trim();
-      }).join(', ');
+      }).join('\n    ');
     } else {
       msg = e.toString();
     }
@@ -64,7 +64,7 @@ function execute(name, fn, cb) {
     var flag = styled('-', 'red');
     var nam_ = styled(name, 'red');
     var msg_ = styled(msg, 'grey');
-    log(' %s %s %s', flag, nam_, msg_);
+    log(' %s %s \n   %s', flag, nam_, msg_);
 
     fails ++;
     tests.pending = false;
