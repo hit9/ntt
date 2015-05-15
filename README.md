@@ -1,18 +1,18 @@
-mut
+ntt
 ---
 
-Mini unittests module for nodejs/iojs.
+Node Tiny Tests module.
 
 Install
 -------
 
-    npm install mut
+    npm install ntt
 
 Example
 -------
 
 ```js
-var unit = require('mut');
+var unit = require('ntt');
 
 unit('unit', function(test) {
   test('case1', function(done) {
@@ -28,7 +28,7 @@ unit('unit', function(test) {
 });
 ```
 
-mut is **not a testing tool**, just run `node test.js`.
+ntt is **not a testing tool**, just run `node test.js`.
 
 License
 ------------
