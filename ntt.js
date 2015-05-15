@@ -1,11 +1,11 @@
 // Mini unittests module for nodejs/iojs.
 // Copyright (c) Chao Wang <hit9@icloud.com>
 //
-// Source: github.com/hit9/mut.git
+// Source: github.com/hit9/ntt.git
 //
 // Example:
 //
-//   mut('unit', function(test) {
+//   ntt('unit', function(test) {
 //     test('case1', function(done) {
 //       done();
 //     });
