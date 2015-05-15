@@ -1,5 +1,5 @@
 var assert = require('assert');
-var unit = require('./mut');
+var unit = require('./ntt');
 
 unit('example', function(test) {
   test('case1', function(done) {
