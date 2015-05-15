@@ -1,4 +1,5 @@
-// Mini unittests module for nodejs/iojs.
+// Node Tiny Tests module.
+//
 // Copyright (c) Chao Wang <hit9@icloud.com>
 //
 // Source: github.com/hit9/ntt.git
