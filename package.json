@@ -1,14 +1,14 @@
 {
-    "name": "mut",
-    "version": "0.0.4",
+    "name": "ntt",
+    "version": "0.0.5",
     "repository": {
         "type": "git",
-        "url": "git://github.com/hit9/mut"
+        "url": "git://github.com/hit9/ntt"
 
     },
-    "description": "Mini unittests module for nodejs/iojs.",
+    "description": "Node Tiny Tests module.",
     "author": "hit9 <hit9@icloud.com>",
     "keywords": ["test"],
-    "main": "./mut.js",
+    "main": "./ntt.js",
     "license": "MIT"
 }
