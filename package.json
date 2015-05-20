@@ -4,7 +4,10 @@
     "repository": {
         "type": "git",
         "url": "git://github.com/hit9/ntt"
-
+    },
+    "engines": {
+        "iojs": ">=1.1",
+        "node": ">=0.10"
     },
     "description": "Node Tiny Tests module.",
     "author": "hit9 <hit9@icloud.com>",
