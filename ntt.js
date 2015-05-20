@@ -1,10 +1,5 @@
-// Node Tiny Tests module.
-//
-// Copyright (c) Chao Wang <hit9@icloud.com>
-//
-// Source: github.com/hit9/ntt.git
-//
-// Example:
+// Node Tiny Tests module. https://github.com/hit9/ntt
+// MIT. Copyright (c) Chao Wang <hit9@icloud.com>
 //
 //   ntt('unit', function(test) {
 //     test('case1', function(done) {
@@ -16,8 +11,6 @@
 //       }, 1000)
 //     });
 //   });
-//
-// License: MIT.
 
 var domain = require('domain');
 var util   = require('util');
@@ -54,7 +47,6 @@ function execute(name, fn, cb) {
     if (e.stack) {
       msg = e.stack.trim()
       .split(/\n/)
-      .slice(0, 2)
       .map(function(s) {
         return s.trim();
       }).join('\n    ');
